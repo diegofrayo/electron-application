@@ -1,0 +1,11 @@
+{
+  "name": "electron-application",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "electron": "^1.6.11"
+  },
+  "scripts": {
+    "dev": "electron src/main.js"
+  }
+}
