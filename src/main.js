@@ -1,7 +1,18 @@
-const {
+// npm libs
+import {
   app,
   BrowserWindow,
-} = require('electron');
+} from 'electron';
+
+// dev configs
+import devtools from './config/devtools.js';
+
+// js app
+import initApp from './js/app.js';
+
+if (process.env.NODE_ENV === 'development') {
+  devtools();
+}
 
 app.on('before-quit', () => {
   console.log('before-quit');
@@ -12,12 +23,13 @@ app.on('ready', () => {
   let win = new BrowserWindow({
     center: true,
     height: 500,
+    // resizable: false,
     show: false,
     title: 'Hello HeyDev!',
     width: 500,
   });
 
-  win.loadURL('https://heydev.now.sh/');
+  win.loadURL(`file://${__dirname}/templates/login.html`);
 
   win.on('ready-to-show', () => {
     win.show();
@@ -32,5 +44,9 @@ app.on('ready', () => {
     win = null;
     app.quit();
   });
+
+  // if (process.env.NODE_ENV === 'development') {
+  //   win.toggleDevTools();
+  // }
 
 });
