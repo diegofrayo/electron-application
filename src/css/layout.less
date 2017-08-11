@@ -1,3 +1,29 @@
+.main-container{
+  background-color: darken(@base-bg, 5%);
+  border-radius: 5px;
+  display: flex;
+  height: 100%;
+}
+
+.layout-view{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  .header{
+    background-color: darken(@base-bg, 80%);
+    color: darken(@base-bg, 10%);
+    flex-shrink: 0;
+    padding: 10px 20px;
+  }
+
+  .content{
+    flex-grow: 1;
+    overflow: auto;
+    padding: 20px;
+  }
+}
+
 .page-title{
   margin-bottom: 20px;
   text-transform: uppercase;

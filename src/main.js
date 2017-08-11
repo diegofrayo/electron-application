@@ -7,12 +7,14 @@ import {
 // dev configs
 import devtools from './config/devtools.js';
 
-// js app
-import initApp from './js/app.js';
+// events
+import ipcMainEvents from './js/ipcMainEvents.js';
 
 if (process.env.NODE_ENV === 'development') {
   devtools();
 }
+
+global.win; // eslint-disable-line
 
 app.on('before-quit', () => {
   console.log('before-quit');
@@ -20,7 +22,7 @@ app.on('before-quit', () => {
 
 app.on('ready', () => {
 
-  let win = new BrowserWindow({
+  global.win = new BrowserWindow({
     center: true,
     height: 500,
     // resizable: false,
@@ -29,24 +31,26 @@ app.on('ready', () => {
     width: 500,
   });
 
-  win.loadURL(`file://${__dirname}/templates/login.html`);
+  global.win.loadURL(`file://${__dirname}/index.html`);
 
-  win.on('ready-to-show', () => {
-    win.show();
+  global.win.on('ready-to-show', () => {
+    global.win.show();
   });
 
-  win.on('move', () => {
-    console.log(`window's position: ${win.getPosition()}`);
+  global.win.on('move', () => {
+    // console.log(`global.window's position: ${global.win.getPosition()}`);
   });
 
-  win.on('closed', () => {
+  global.win.on('closed', () => {
     console.log('closed');
-    win = null;
+    global.win = null;
     app.quit();
   });
 
   // if (process.env.NODE_ENV === 'development') {
-  //   win.toggleDevTools();
+  //   global.win.toggleDevTools();
   // }
+
+  ipcMainEvents(global.win);
 
 });
