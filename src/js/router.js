@@ -1,14 +1,22 @@
+// electron
+import {
+  ipcRenderer,
+} from 'electron';
+
 // npm libs
 import jQuery from 'jquery';
 
-// utils
+// app
 import {
   readFile,
 } from './utils.js';
+import layout from './layout.js';
 
 const readTemplate = moduleName => readFile(`./src/templates/${moduleName}.html`);
 
-const redirect = (moduleName, isAuth) => {
+const redirect = (moduleName, isAuth = true) => {
+
+  if (window.modules.currentModule === moduleName) return;
 
   readTemplate(moduleName)
     .then((template) => {
@@ -39,16 +47,22 @@ const redirect = (moduleName, isAuth) => {
 
       if (template) {
         jQuery('.layout-view').find('.content').html(template);
+        layout();
       }
 
-      if (window.modules.currentModule) window.modules[window.modules.currentModule] = null;
+      // if (window.modules.currentModule) window.modules[window.modules.currentModule] = null;
       if (window.modules[moduleName]) window.modules[moduleName]();
+
       window.modules.layoutIsLoaded = true;
       window.modules.currentModule = moduleName;
     })
     .catch((err) => {
-      alert('Error, the view could not be loaded.');
-      console.log(err);
+      ipcRenderer.send('show-dialog', {
+        message: 'The view could not be loaded.',
+        title: 'Error',
+        type: 'error',
+      });
+      console.error(err);
     });
 };
 

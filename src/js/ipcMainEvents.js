@@ -1,3 +1,4 @@
+// electron
 import {
   ipcMain,
   dialog,
@@ -32,12 +33,12 @@ export default (win) => {
   //   });
   // });
 
-  // ipcMain.on('show-dialog', (event, info) => {
-  //   dialog.showMessageBox(win, {
-  //     type: info.type,
-  //     title: info.title,
-  //     message: info.message,
-  //   });
-  // });
+  ipcMain.on('show-dialog', (event, info) => {
+    dialog.showMessageBox(win, {
+      type: info.type,
+      title: info.title,
+      message: info.message,
+    });
+  });
 
 };

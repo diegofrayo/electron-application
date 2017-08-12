@@ -13,7 +13,8 @@
     "electron-reload": "^1.2.1",
     "eslint": "^4.4.1",
     "eslint-config-airbnb-base": "^11.3.1",
-    "eslint-plugin-import": "^2.2.0"
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-watch": "^3.1.2"
   },
   "dependencies": {
     "electron-compile": "^6.4.1",

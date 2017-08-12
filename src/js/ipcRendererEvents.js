@@ -4,11 +4,11 @@ import {
   remote,
 } from 'electron';
 
-// npm libs
+// node libs
 import os from 'os';
 import path from 'path';
 
-// utils
+// app
 import {
   readFile,
 } from './utils.js';
@@ -16,8 +16,6 @@ import {
 function setIpcRendererEvent() {
 
   ipcRenderer.on('text-file-selected', (event, filePath) => {
-
-    console.log(`ipcRenderer received: ${filePath}`);
 
     readFile(filePath[0])
       .then((text) => {
@@ -28,7 +26,7 @@ function setIpcRendererEvent() {
           center: true,
           height: 500,
           show: false,
-          title: 'Text editor',
+          title: 'Text Editor',
           width: 500,
         });
 
@@ -43,7 +41,7 @@ function setIpcRendererEvent() {
 
         textEditorWindow.webContents.on('did-finish-load', () => {
           textEditorWindow.webContents.send('show-data', {
-            filePath,
+            filePath: filePath[0],
             text,
           });
         });

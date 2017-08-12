@@ -1,4 +1,4 @@
-// npm libs
+// electron
 import {
   app,
   BrowserWindow,
@@ -7,8 +7,9 @@ import {
 // dev configs
 import devtools from './config/devtools.js';
 
-// events
+// electron events
 import ipcMainEvents from './js/ipcMainEvents.js';
+import errorHandler from './js/errorHandler.js';
 
 if (process.env.NODE_ENV === 'development') {
   devtools();
@@ -52,5 +53,5 @@ app.on('ready', () => {
   // }
 
   ipcMainEvents(global.win);
-
+  errorHandler(global.win);
 });

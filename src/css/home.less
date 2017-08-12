@@ -1,0 +1,28 @@
+.home-view{
+  .projects-list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  .project{
+    background-color: darken(@base-bg, 20%);
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 1px darken(@base-bg, 80%);
+    cursor: pointer;
+    flex: 0;
+    padding: 10px;
+    text-align: center;
+
+    &__icon{
+      display: block;
+      font-size: 60px;
+      text-align: center;
+    }
+
+    &__title{
+      margin-top: 7px;
+    }
+  }
+}
