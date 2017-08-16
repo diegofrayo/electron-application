@@ -1,0 +1,6 @@
+// create a file called 'firebase.json'
+{
+  "firebase_api_key": "",
+  "firebase_auth_domain": "",
+  "firebase_database_url": "",
+}

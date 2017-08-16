@@ -9,10 +9,10 @@ import jQuery from 'jquery';
 // electron-events
 import {
   sendIpcRendererEvent,
-} from './ipcRendererEvents.js';
+} from './../electron/ipc-renderer-events.js';
 
 // app
-import store from './store.js';
+import store from './../app/store.js';
 
 const printCategory = category =>
   `
@@ -35,9 +35,6 @@ export default function project() {
 
   const state = store.getStore();
   const selectedProject = state.projects[state.selectedProject];
-  // const bookmarksHTML = Object.keys(selectedProject.bookmarks)
-  //   .map(key => printCategory(selectedProject.bookmarks[key]))
-  //   .reduce((prevValue, currentValue) => prevValue + currentValue, '');
 
   Object.keys(selectedProject.bookmarks)
     .forEach(key => projectContent.append(printCategory(selectedProject.bookmarks[key])));
@@ -51,4 +48,6 @@ export default function project() {
   projectView.find('.bookmark').click((event) => {
     shell.openExternal(jQuery(event.currentTarget).data('url'));
   });
+
+  return projectView;
 }

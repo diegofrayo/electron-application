@@ -2,7 +2,7 @@
 import jQuery from 'jquery';
 
 // app
-import router from './router.js';
+import router from './../app/router.js';
 
 export default function login() {
 
@@ -10,7 +10,8 @@ export default function login() {
 
   loginView.find('.form').submit((event) => {
     event.preventDefault();
-    router.redirect('home');
+    router.redirect(router.routes.HOME);
   });
 
+  return loginView;
 }

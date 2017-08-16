@@ -2,8 +2,8 @@
 import jQuery from 'jquery';
 
 // app
-import router from './router.js';
-import store from './store.js';
+import router from './../app/router.js';
+import store from './../app/store.js';
 
 const printProject = (project, id) =>
   `
@@ -27,6 +27,12 @@ export default function home() {
 
   homeView.find('.project').click((event) => {
     store.getStore().selectedProject = jQuery(event.currentTarget).data('id');
-    router.redirect('project-view');
+    router.redirect(router.routes.PROJECT);
   });
+
+  homeView.find('.form').submit((event) => {
+    event.preventDefault();
+  });
+
+  return homeView;
 }

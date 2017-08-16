@@ -9,8 +9,9 @@ import jQuery from 'jquery';
 // app
 import {
   readFile,
+  showDialog,
 } from './utils.js';
-import layout from './layout.js';
+import layout from './../views/layout.js';
 
 const readTemplate = moduleName => readFile(`./src/templates/${moduleName}.html`);
 
@@ -50,22 +51,23 @@ const redirect = (moduleName, isAuth = true) => {
         layout();
       }
 
-      // if (window.modules.currentModule) window.modules[window.modules.currentModule] = null;
-      if (window.modules[moduleName]) window.modules[moduleName]();
+      if (window.modules.currentModule) window.modules[window.modules.currentModule].deleteInstance();
+      if (window.modules[moduleName]) window.modules[moduleName].createInstance();
 
       window.modules.layoutIsLoaded = true;
       window.modules.currentModule = moduleName;
     })
     .catch((err) => {
-      ipcRenderer.send('show-dialog', {
-        message: 'The view could not be loaded.',
-        title: 'Error',
-        type: 'error',
-      });
+      showDialog('Error', 'error', 'The view could not be loaded.');
       console.error(err);
     });
 };
 
 export default {
   redirect,
+  routes: {
+    HOME: 'home',
+    LOGIN: 'login',
+    PROJECT: 'project',
+  },
 };

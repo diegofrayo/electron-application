@@ -19,17 +19,9 @@ ipcRenderer.on('show-data', (event, data) => {
 
     fs.writeFile(data.filePath, textEditorView.find('.textarea').val(), (err) => {
       if (err) {
-        ipcRenderer.send('show-dialog', {
-          message: 'The file could not be saved.',
-          title: 'Error',
-          type: 'error',
-        });
+        showDialog('Error', 'error', 'The file could not be saved.');
       } else {
-        ipcRenderer.send('show-dialog', {
-          message: 'The file was saved.',
-          title: 'Success',
-          type: 'info',
-        });
+        showDialog('Success', 'info', 'The file was saved.');
       }
     });
 

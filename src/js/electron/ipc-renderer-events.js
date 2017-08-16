@@ -11,7 +11,7 @@ import path from 'path';
 // app
 import {
   readFile,
-} from './utils.js';
+} from './../app/utils.js';
 
 function setIpcRendererEvent() {
 

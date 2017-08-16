@@ -5,11 +5,11 @@ import {
 } from 'electron';
 
 // dev configs
-import devtools from './config/devtools.js';
+import devtools from './js/electron/devtools.js';
 
 // electron events
-import ipcMainEvents from './js/ipcMainEvents.js';
-import errorHandler from './js/errorHandler.js';
+import ipcMainEvents from './js/electron/ipc-main-events.js';
+import errorHandler from './js/electron/error-handler.js';
 
 if (process.env.NODE_ENV === 'development') {
   devtools();
@@ -26,7 +26,6 @@ app.on('ready', () => {
   global.win = new BrowserWindow({
     center: true,
     height: 500,
-    // resizable: false,
     show: false,
     title: 'Hello HeyDev!',
     width: 500,

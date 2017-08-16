@@ -2,7 +2,7 @@
 import jQuery from 'jquery';
 
 // app
-import router from './router.js';
+import router from './../app/router.js';
 
 export default function layout() {
 
@@ -10,7 +10,7 @@ export default function layout() {
 
   layoutView.find('.home-icon').click((event) => {
     event.preventDefault();
-    router.redirect('home');
+    router.redirect(router.routes.HOME);
   });
 
 }
