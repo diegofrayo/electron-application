@@ -1,26 +1,75 @@
 .project-view{
   .category{
-    border-bottom: 1px solid darken(@base-bg, 30%);
+    background-color: darken(@base-bg, 15%);
     margin-bottom: 20px;
-    padding: 30px 0;
+    padding: 10px;
 
-    &__title{
+    &__name{
       margin-bottom: 20px;
     }
 
     &__bookmarks{
       display: flex;
+      flex-direction: column;
       justify-content: space-around;
     }
   }
 
   .bookmark{
     cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+    position: relative;
 
     &__icon{
-      display: block;
+      flex-shrink: 0;
       font-size: 60px;
-      text-align: center;
+      margin-right: 10px;
+
+      &-remove{
+        background-color: darken(@base-bg, 50%);
+        border-radius: 100%;
+        color: white;
+        font-size: 0.9em;
+        font-weight: bold;
+        left: -7px;
+        padding: 1px;
+        position: absolute;
+        top: 1px;
+      }
     }
+
+    &__inner-container{
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: center;
+      max-width: 330px;
+    }
+
+    &__name{}
+
+    &__url{
+      color: blue;
+      font-weight: 700;
+      text-decoration: underline;
+    }
+  }
+
+  .btn-clear-path{
+    background-color: #7b7b7b;
+    flex-shrink: 0;
+  }
+
+  .project-file-path{
+    .inputs();
+    cursor: default;
+    flex-grow: 1;
+    max-width: 310px;
+  }
+
+  .btn-open-file{
+    flex-shrink: 0;
   }
 }

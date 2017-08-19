@@ -1,8 +1,22 @@
 .input-group{
+  display: flex;
+  flex-direction: column;
   margin-bottom: 15px;
 
   > label{
     display: block;
     margin-bottom: 5px;
+  }
+
+  &-inline{
+    display: flex;
+
+    button, input{
+      height: 40px;
+    }
+
+    input{
+      flex-grow: 1;
+    }
   }
 }

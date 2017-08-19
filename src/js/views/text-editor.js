@@ -9,6 +9,11 @@ import fs from 'fs';
 // npm libs
 import jQuery from 'jquery';
 
+// app
+import {
+  showDialog,
+} from './../js/app/utils.js';
+
 ipcRenderer.on('show-data', (event, data) => {
 
   const textEditorView = jQuery('.main-container');
@@ -21,7 +26,7 @@ ipcRenderer.on('show-data', (event, data) => {
       if (err) {
         showDialog('Error', 'error', 'The file could not be saved.');
       } else {
-        showDialog('Success', 'info', 'The file was saved.');
+        showDialog('Success', 'info', 'The file has been saved.');
       }
     });
 

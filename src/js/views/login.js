@@ -6,12 +6,16 @@ import router from './../app/router.js';
 
 export default function login() {
 
-  const loginView = jQuery('.login-view');
+  let loginView = jQuery('.login-view');
 
   loginView.find('.form').submit((event) => {
     event.preventDefault();
     router.redirect(router.routes.HOME);
   });
 
-  return loginView;
+  return {
+    destroy: () => {
+      loginView = null;
+    },
+  };
 }

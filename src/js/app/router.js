@@ -1,8 +1,3 @@
-// electron
-import {
-  ipcRenderer,
-} from 'electron';
-
 // npm libs
 import jQuery from 'jquery';
 

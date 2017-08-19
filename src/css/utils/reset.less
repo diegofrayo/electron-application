@@ -15,12 +15,15 @@ h1, h2, h3, h4, h5, h6, p{
   cursor: default;
 }
 
+h1, h2, h3, h4{
+  margin-bottom: 15px;
+}
+
 span, img, i{
   vertical-align: middle;
 }
 
 button{
-  border-radius: 2px;
   border: 0;
   color: white;
   cursor: pointer;
@@ -31,11 +34,15 @@ button{
   text-transform: uppercase;
 }
 
-input{
+.inputs{
   background-color: darken(@base-bg, 10%);
   border: 1px solid darken(@base-bg, 15%);
   color: black;
   padding: 10px;
+}
+
+input, select{
+  .inputs();
 }
 
 hr{

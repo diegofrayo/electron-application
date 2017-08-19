@@ -2,7 +2,13 @@
 import {
   app,
   BrowserWindow,
+  Tray,
+  globalShortcut,
 } from 'electron';
+
+// node libs
+import os from 'os';
+import path from 'path';
 
 // dev configs
 import devtools from './js/electron/devtools.js';
@@ -15,10 +21,11 @@ if (process.env.NODE_ENV === 'development') {
   devtools();
 }
 
-global.win; // eslint-disable-line
+global.win = null;
 
 app.on('before-quit', () => {
   console.log('before-quit');
+  globalShortcut.unregisterAll();
 });
 
 app.on('ready', () => {
@@ -26,8 +33,10 @@ app.on('ready', () => {
   global.win = new BrowserWindow({
     center: true,
     height: 500,
+    icon: path.join(__dirname, 'assets', 'icons', 'tray.png'), // for linux
+    resizable: false,
     show: false,
-    title: 'Hello HeyDev!',
+    title: 'Hello Diego!',
     width: 500,
   });
 
@@ -51,6 +60,28 @@ app.on('ready', () => {
   //   global.win.toggleDevTools();
   // }
 
+  let icon;
+  if (os.platform() === 'win32') {
+    icon = path.join(__dirname, 'assets', 'icons', 'tray.ico');
+  } else {
+    icon = path.join(__dirname, 'assets', 'icons', 'tray.png');
+  }
+
+  global.tray = new Tray(icon);
+  global.tray.setToolTip('Hey Dev!');
+  global.tray.on('click', () => {
+    if (global.win.isVisible()) {
+      global.win.hide();
+    } else {
+      global.win.show();
+    }
+  });
+
   ipcMainEvents(global.win);
   errorHandler(global.win);
+
+  globalShortcut.register('Ctrl+R', () => {
+    app.relaunch();
+    app.exit(0);
+  });
 });

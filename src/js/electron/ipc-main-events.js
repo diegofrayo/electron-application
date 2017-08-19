@@ -6,16 +6,20 @@ import {
 
 export default (win) => {
 
-  ipcMain.on('open-text-file', (event) => {
-    dialog.showOpenDialog(win, {
-      title: 'Select a file',
-      buttonLabel: 'Select file',
-      properties: ['openFile'],
-    }, (dir) => {
-      if (dir) {
-        event.sender.send('text-file-selected', dir);
-      }
-    });
+  ipcMain.on('open-text-file', (event, path) => {
+    if (path) {
+      event.sender.send('text-file-selected', path);
+    } else {
+      dialog.showOpenDialog(win, {
+        title: 'Select a file',
+        buttonLabel: 'Select file',
+        properties: ['openFile'],
+      }, (dir) => {
+        if (dir) {
+          event.sender.send('text-file-selected', dir[0]);
+        }
+      });
+    }
   });
 
   // ipcMain.on('open-save-dialog', (event, ext) => {

@@ -3,7 +3,11 @@ import home from './js/views/home.js';
 import login from './js/views/login.js';
 import project from './js/views/project.js';
 
+import menu from './js/electron/menu.js';
+
 window.addEventListener('load', () => {
+
+  menu();
 
   window.modules = {
     currentModule: '',
@@ -14,7 +18,7 @@ window.addEventListener('load', () => {
         this.instance = home();
       },
       deleteInstance: function deleteInstance() {
-        this.instance = null;
+        this.instance = this.instance.destroy();
       },
     },
     login: {
@@ -23,7 +27,7 @@ window.addEventListener('load', () => {
         this.instance = login();
       },
       deleteInstance: function deleteInstance() {
-        this.instance = null;
+        this.instance = this.instance.destroy();
       },
     },
     project: {
@@ -32,7 +36,7 @@ window.addEventListener('load', () => {
         this.instance = project();
       },
       deleteInstance: function deleteInstance() {
-        this.instance = null;
+        this.instance = this.instance.destroy();
       },
     },
   };

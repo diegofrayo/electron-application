@@ -3,6 +3,7 @@ import {
   ipcRenderer,
   remote,
 } from 'electron';
+import electronSettings from 'electron-settings';
 
 // node libs
 import os from 'os';
@@ -16,18 +17,17 @@ import {
 function setIpcRendererEvent() {
 
   ipcRenderer.on('text-file-selected', (event, filePath) => {
-
-    readFile(filePath[0])
+    readFile(filePath)
       .then((text) => {
 
         const BrowserWindow = remote.BrowserWindow;
         const mainWindow = remote.getGlobal('win');
         const textEditorWindow = new BrowserWindow({
           center: true,
-          height: 500,
+          height: 400,
           show: false,
           title: 'Text Editor',
-          width: 500,
+          width: 400,
         });
 
         if (os.platform() !== 'win32') {
@@ -41,12 +41,14 @@ function setIpcRendererEvent() {
 
         textEditorWindow.webContents.on('did-finish-load', () => {
           textEditorWindow.webContents.send('show-data', {
-            filePath: filePath[0],
+            filePath,
             text,
           });
         });
 
-        textEditorWindow.loadURL(`file://${path.join(__dirname, '..')}/templates/text-editor.html`);
+        electronSettings.set('file-path', filePath);
+
+        textEditorWindow.loadURL(`file://${path.join(__dirname, '../..')}/templates/text-editor.html`);
       })
       .catch(() => {});
 
@@ -55,6 +57,6 @@ function setIpcRendererEvent() {
 
 setIpcRendererEvent();
 
-export function sendIpcRendererEvent() {
-  ipcRenderer.send('open-text-file');
-}
+export default {
+  openFile: filePath => ipcRenderer.send('open-text-file', filePath),
+};
