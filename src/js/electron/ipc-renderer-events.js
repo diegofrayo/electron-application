@@ -25,6 +25,7 @@ function setIpcRendererEvent() {
         const textEditorWindow = new BrowserWindow({
           center: true,
           height: 400,
+          icon: path.join(__dirname, '../../', 'assets', 'icons', 'tray.png'),
           show: false,
           title: 'Text Editor',
           width: 400,

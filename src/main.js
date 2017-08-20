@@ -33,7 +33,7 @@ app.on('ready', () => {
   global.win = new BrowserWindow({
     center: true,
     height: 500,
-    icon: path.join(__dirname, 'assets', 'icons', 'tray.png'), // for linux
+    icon: path.join(__dirname, 'assets', 'icons', 'tray.png'),
     resizable: false,
     show: false,
     title: 'Hello Diego!',
