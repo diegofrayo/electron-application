@@ -3,12 +3,21 @@ import firebase from 'firebase';
 
 // app
 import {
-  readFile,
   showDialog,
 } from './utils.js';
 import store from './store.js';
 
-let firebaseConnection = null;
+const firebaseConfig = require('./../../config/firebase.json');
+
+if (firebase.apps === undefined || (firebase.apps && firebase.apps.length === 0)) {
+  firebase.initializeApp({
+    databaseURL: firebaseConfig.firebase_database_url,
+    authDomain: firebaseConfig.firebase_auth_domain,
+    apiKey: firebaseConfig.firebase_api_key,
+  });
+}
+
+const firebaseConnection = firebase.database().ref().child('mini-project-manager/projects/');
 
 const createProject = (projectName) => {
 
@@ -76,53 +85,23 @@ const createBookmark = ({
     });
 };
 
-readFile('./src/config/firebase.json')
-  .then((data) => {
+const updateProjectCallback = (snapshot) => {
 
-    try {
+  const state = store.getStore();
 
-      const firebaseConfig = JSON.parse(data);
-
-      if (firebase.apps === undefined || (firebase.apps && firebase.apps.length === 0)) {
-        firebase.initializeApp({
-          databaseURL: firebaseConfig.firebase_database_url,
-          authDomain: firebaseConfig.firebase_auth_domain,
-          apiKey: firebaseConfig.firebase_api_key,
-        });
-      }
-
-      return firebase.database().ref().child('mini-project-manager/projects/');
-
-    } catch (e) {
-      throw new Error('This firebase file could not readed correctly.');
-    }
-
-  })
-  .then((connection) => {
-
-    firebaseConnection = connection;
-
-    const addProjectCallback = (snapshot) => {
-
-      const state = store.getStore();
-
-      store.update({
-        projects: Object.assign({}, state.projects, {
-          [snapshot.key]: snapshot.val(),
-        }),
-      });
-
-      store.dispatch('home');
-      store.dispatch('project');
-    };
-
-    firebaseConnection.on('child_added', addProjectCallback);
-    firebaseConnection.on('child_changed', addProjectCallback);
-    firebaseConnection.on('child_removed', addProjectCallback);
-  })
-  .catch((error) => {
-    showDialog('Error', 'error', error.message);
+  store.update({
+    projects: Object.assign({}, state.projects, {
+      [snapshot.key]: snapshot.val(),
+    }),
   });
+
+  store.dispatch('home');
+  store.dispatch('project');
+};
+
+firebaseConnection.on('child_added', updateProjectCallback);
+firebaseConnection.on('child_changed', updateProjectCallback);
+firebaseConnection.on('child_removed', updateProjectCallback);
 
 export default {
   createProject,
