@@ -1,4 +1,4 @@
-<section class="home-view">
+export default `<section class="home-view">
   <section>
     <h2 class="page-title">Projects</h2>
     <div class="projects-list"></div>
@@ -17,3 +17,4 @@
     </form>
   </section>
 </section>
+`

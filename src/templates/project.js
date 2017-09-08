@@ -1,4 +1,4 @@
-<section class="project-view">
+export default `<section class="project-view">
   <h2 class="page-title"></h2>
   <section>
     <h3>Bookmarks</h3>
@@ -38,3 +38,4 @@
     </form>
   </section>
 </section>
+`

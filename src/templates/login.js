@@ -1,4 +1,4 @@
-<section class="login-view">
+export default `<section class="login-view">
   <h2 class="page-title">Sign In</h2>
   <form class="form">
     <div class="input-group">
@@ -12,3 +12,4 @@
     <button type="submit" class="btn-default">Enter</button>
   </form>
 </section>
+`

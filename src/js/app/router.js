@@ -3,12 +3,20 @@ import jQuery from 'jquery';
 
 // app
 import {
-  readFile,
   showDialog,
 } from './utils.js';
 import layout from './../views/layout.js';
 
-const readTemplate = moduleName => readFile(`./src/templates/${moduleName}.html`);
+// templates
+import templates from './../../templates/default';
+
+// const readTemplate = moduleName => readFile(`./src/templates/${moduleName}.html`);
+const readTemplate = (moduleName) => {
+  if (templates[moduleName]) {
+    return Promise.resolve(templates[moduleName]);
+  }
+  return Promise.reject();
+};
 
 const redirect = (moduleName, isAuth = true) => {
 

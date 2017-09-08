@@ -1,4 +1,4 @@
-<section class="layout-view">
+export default `<section class="layout-view">
   <header class="header">
     <h1>
       Diego's Projects
@@ -7,3 +7,4 @@
   </header>
   <section class="content"></section>
 </section>
+`
