@@ -6,6 +6,7 @@ resultPromise = electronInstaller.createWindowsInstaller({
   authors: 'Diego Rayo.',
   description: 'I built this application to learn Electron.',
   exe: 'electron-application.exe',
+  version: '0.0.1',
 });
 
 resultPromise.then(() => console.log('It worked!'), (e) => console.log(`Error: ${e.message}`));

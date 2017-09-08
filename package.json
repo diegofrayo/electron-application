@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "lint": "esw -w -c config.eslint.json src/js/**/* src/main.js",
-    "make-win": "electron-forge make --skip-package",
-    "package-linux": "electron-forge package --platform=linux --arch=x64",
-    "package-mac": "electron-forge package --platform=darwin --arch=x64",
-    "package-win": "electron-forge package --platform=win32 --arch=ia32",
+    "make": "electron-forge make --platform=win32 --arch=ia32",
+    "package:linux": "electron-forge package --platform=linux --arch=x64",
+    "package:mac": "electron-forge package --platform=darwin --arch=x64",
+    "package:win": "electron-forge package --platform=win32 --arch=ia32",
     "start": "cross-env NODE_ENV=development electron src/main.js",
     "start-ef": "cross-env NODE_ENV=development electron-forge start"
   },

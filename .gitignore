@@ -3,3 +3,4 @@ node_modules/
 examples
 src/config/firebase.json
 out/
+tmp/
